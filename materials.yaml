@@ -1,0 +1,23 @@
+Al:
+  density:           2700       # kg m^-3         CRC 2016 p12-216
+  heat_capacity:      897       # J kg^-1 K^-1    CRC 2016 p12-216
+  thermal_expansion:   23.1e-6  # K^-1            CRC 2016 p12-216
+  speed_of_sound:    6420       # m s^-1          CRC 2016 p14-45 
+
+Ti:
+  density:           4506       # kg m^-3         CRC 2016 p12-217
+  heat_capacity:      524       # J kg^-1 K^-1    CRC 2016 p12-217
+  thermal_expansion:    8.6e-6  # K^-1            CRC 2016 p12-217
+  speed_of_sound:    6070       # m s^-1          CRC 2016 p14-45 
+
+W:
+  density:          19300       # kg m^-3         CRC 2016 p12-217
+  heat_capacity:      132       # J kg^-1 K^-1    CRC 2016 p12-217
+  thermal_expansion:    4.5e-6  # K^-1            CRC 2016 p12-217
+  speed_of_sound:    5220       # m s^-1          CRC 2016 p14-45 
+
+StSt:
+  density:           7900       # kg m^-3         CRC 2016 p12-234
+  heat_capacity:      483       # J kg^-1 K^-1    CRC 2016 p12-218 n.b. StSt 310
+  thermal_expansion:   17.3e-6  # K^-1            CRC 2016 p12-234
+  speed_of_sound:    5790       # m s^-1          CRC 2016 p14-45  n.b. StSt 347

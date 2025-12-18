@@ -1,0 +1,72 @@
+Northup:
+  material: Al
+  wavelength: 532e-9
+  skin_depth: 6.595e-09
+  absorption: 0.084
+  pulse_energy: 3e-3
+  pulse_duration: 5e-9
+  waist: 100e-6
+  thickness: 250e-6
+Standa_W:
+  material: W
+  wavelength: 1064e-9
+  skin_depth: 2.24e-08
+  absorption: 0.398
+  pulse_energy: 100e-6
+  pulse_duration: 6.0e-10
+  waist: 100e-6
+  thickness: 250e-6
+Standa_Ti:
+  material: Ti
+  wavelength: 1064e-9
+  skin_depth: 2.112e-08
+  absorption: 0.385
+  pulse_energy: 100e-6
+  pulse_duration: 6.0e-10
+  waist: 100e-6
+  thickness: 250e-6
+Standa_StSt:
+  material: StSt
+  wavelength: 1064e-9
+  skin_depth: 2.118e-08
+  absorption: 0.374
+  pulse_energy: 100e-6
+  pulse_duration: 6.0e-10
+  waist: 100e-6
+  thickness: 250e-6
+Standa_StSt_foil:
+  material: StSt
+  wavelength: 1064e-9
+  skin_depth: 2.118e-08
+  absorption: 0.374
+  pulse_energy: 100e-6
+  pulse_duration: 6.0e-10
+  waist: 50e-6
+  thickness: 10e-6
+Standa_Al:
+  material: Al
+  wavelength: 1064e-9
+  skin_depth: 8.265e-09
+  absorption: 0.05
+  pulse_energy: 100e-6
+  pulse_duration: 6.0e-10
+  waist: 100e-6
+  thickness: 16e-6
+uFlash_Ti:
+  material: Ti
+  wavelength: 1064e-9
+  skin_depth: 2.112e-08
+  absorption: 0.385
+  pulse_energy: 100e-6
+  pulse_duration: 1.3e-09
+  waist: 100e-6
+  thickness: 250e-6
+Millen:
+  material: Al
+  wavelength: 532e-9
+  skin_depth: 6.595e-09
+  absorption: 0.084
+  pulse_energy: 3e-3
+  pulse_duration: 4.6e-09
+  waist: 17e-6
+  thickness: 400e-6

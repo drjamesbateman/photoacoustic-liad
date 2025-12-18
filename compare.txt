@@ -1,0 +1,9 @@
+# Comparison scenarios: experiment_name	publication_label
+# Lines starting with # are ignored
+# Format: tab separated
+
+Northup	Bykov et al.
+Millen	Nikkhou et al.
+Standa_Al	Passive Q-switch/Al
+Standa_StSt	Passive Q-switch/StSt
+uFlash_Ti	Pulsed diode/Ti

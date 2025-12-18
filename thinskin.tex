@@ -1,0 +1,94 @@
+%% AMS-LaTeX Created with the Wolfram Language : www.wolfram.com
+
+\documentclass{article}
+\usepackage{amsmath, amssymb, graphics, setspace}
+
+\newcommand{\mathsym}[1]{{}}
+\newcommand{\unicode}[1]{{}}
+
+\begin{document}
+
+\begin{doublespace}
+\noindent\(\pmb{\text{$\$$Assumptions}\text{:=}\{r>0,z>0,\xi >0,w>0,\tau >0,v>0,\text{S0}>0,\eta >0,\text{devo}>0\}}\\
+\pmb{S[\text{r$\_$},\text{z$\_$},\text{t$\_$}]\text{:=}-\text{S0} \text{Exp}\left[-r^2/\left(2 w^2\right)\right]2\xi  \text{DiracDelta}[z]\frac{t}{\tau
+}\text{Exp}\left[-(t/\tau )^2\right]}\\
+\pmb{\text{tmp}= \text{Integrate}\left[\frac{\text{rdash}}{4\pi \sqrt{\text{rdash}^2+(z-\text{zdash})^2}}S\left[\text{rdash},\text{zdash},t-\frac{\sqrt{\text{rdash}^2+(z-\text{zdash})^2}}{v}\right],\right.}\\
+\pmb{\{\text{zdash},-\text{Infinity},\text{Infinity}\}]}\\
+\pmb{u[\text{z$\_$},\text{t$\_$}]=2\pi  \text{Integrate}[\text{tmp},\{\text{rdash},0,\text{Infinity}\}]}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\frac{e^{-\frac{\text{rdash}^2}{2 w^2}-\frac{\left(t-\frac{\sqrt{\text{rdash}^2+z^2}}{v}\right)^2}{\tau ^2}} \text{rdash} \text{S0} \left(-t
+v+\sqrt{\text{rdash}^2+z^2}\right) \xi }{2 \pi  v \sqrt{\text{rdash}^2+z^2} \tau }\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(-\frac{1}{2 \left(2 w^2+v^2 \tau ^2\right)^{3/2}}e^{-\frac{z^2}{v^2 \tau ^2}-t^2 \left(\frac{1}{\tau ^2}+\frac{v^2}{2 w^2+v^2 \tau ^2}\right)}
+\text{S0} v w \xi  \tau  \left(e^{\frac{z^2}{2 w^2}+\frac{t^2}{\tau ^2}+\frac{z^2}{v^2 \tau ^2}} \sqrt{2 \pi } t v^2 \tau -2 e^{\frac{t \left(4 w^2
+z+v^2 (t v+2 z) \tau ^2\right)}{2 v w^2 \tau ^2+v^3 \tau ^4}} w \sqrt{2 w^2+v^2 \tau ^2}+e^{\frac{z^2}{2 w^2}+\frac{t^2}{\tau ^2}+\frac{z^2}{v^2
+\tau ^2}} \sqrt{2 \pi } t v^2 \tau  \text{Erf}\left[\frac{2 t v w^2-z \left(2 w^2+v^2 \tau ^2\right)}{v w \tau  \sqrt{4 w^2+2 v^2 \tau ^2}}\right]\right)\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\pmb{a[\text{z$\_$},\text{t$\_$}]=\text{Simplify}[D[u[z,\text{tdash}],\text{tdash}]\text{/.}\text{tdash}\text{-$>$}t]}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(-\frac{1}{2 \tau  \left(2 w^2+v^2 \tau ^2\right)^3}e^{-\frac{(-t v+z)^2}{v^2 \tau ^2}} \text{S0} w \xi  \left(-2 e^{\frac{\left(-2 t v
+w^2+2 w^2 z+v^2 z \tau ^2\right)^2}{4 v^2 w^4 \tau ^2+2 v^4 w^2 \tau ^4}} \sqrt{2 \pi } t^2 v^5 \tau ^3 \sqrt{2 w^2+v^2 \tau ^2}+8 t \left(2 v w^5+3
+v^3 w^3 \tau ^2+v^5 w \tau ^4\right)-\left(2 w^2+v^2 \tau ^2\right) \left(8 w^3 z+4 v^2 w z \tau ^2-e^{\frac{\left(-2 t v w^2+2 w^2 z+v^2 z \tau
+^2\right)^2}{4 v^2 w^4 \tau ^2+2 v^4 w^2 \tau ^4}} \sqrt{2 \pi } v^3 \tau ^3 \sqrt{2 w^2+v^2 \tau ^2}\right)+e^{\frac{\left(-2 t v w^2+2 w^2 z+v^2
+z \tau ^2\right)^2}{4 v^2 w^4 \tau ^2+2 v^4 w^2 \tau ^4}} \sqrt{2 \pi } v^3 \tau ^3 \sqrt{2 w^2+v^2 \tau ^2} \left(-2 t^2 v^2+2 w^2+v^2 \tau ^2\right)
+\text{Erf}\left[\frac{2 t v w^2-z \left(2 w^2+v^2 \tau ^2\right)}{v w \tau  \sqrt{4 w^2+2 v^2 \tau ^2}}\right]\right)\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\pmb{\text{unat}[\text{znat$\_$},\text{tnat$\_$}]=\text{FullSimplify}\left[\frac{u[\text{znat} \text{devo},\text{tnat} \text{devo}/v]}{\text{S0}
+\xi  \text{devo}}\text{//.}\left\{w\text{-$>$}\text{devo}/\eta ,\tau \text{-$>$}\left.w^2\right/(v \text{devo})\right\}\right]}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\frac{e^{-\eta ^4 \left(\text{znat}^2+\text{tnat}^2 \left(1+\frac{1}{1+2 \eta ^2}\right)\right)} \left(2 e^{\frac{\text{tnat} \eta ^4
+\left(\text{tnat}+2 \text{znat}+4 \text{znat} \eta ^2\right)}{1+2 \eta ^2}} \sqrt{1+2 \eta ^2}-e^{\frac{\text{znat}^2 \eta ^2}{2}+\left(\text{tnat}^2+\text{znat}^2\right)
+\eta ^4} \sqrt{2 \pi } \text{tnat} \eta  \text{Erfc}\left[\frac{\text{znat} \eta +2 (-\text{tnat}+\text{znat}) \eta ^3}{\sqrt{2+4 \eta ^2}}\right]\right)}{2
+\left(1+2 \eta ^2\right)^{3/2}}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\pmb{\text{anat}[\text{znat$\_$},\text{tnat$\_$}]=\text{Simplify}[D[\text{unat}[\text{znat},\text{tdash}],\text{tdash}]\text{/.}\text{tdash}\text{-$>$}\text{tnat},\text{Assumptions}\text{-$>$}\{\text{znat}>0,\text{tnat}>0\}]}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\frac{1}{2 \left(1+2 \eta ^2\right)^3}e^{-2 \text{tnat}^2 \eta ^4+2 \text{tnat} \text{znat} \eta ^4-\frac{1}{2} \text{znat}^2 \left(\eta
+^2+4 \eta ^4\right)} \left(4 e^{\text{tnat}^2 \eta ^4+\text{znat}^2 \left(\frac{\eta ^2}{2}+\eta ^4\right)} \eta ^4 \left(1+2 \eta ^2\right) \left(\text{znat}+2
+\text{znat} \eta ^2-2 \text{tnat} \left(1+\eta ^2\right)\right)+e^{\frac{\text{znat}^2 \eta ^2}{2}+\left(\text{tnat}^2+\text{znat}^2\right) \eta
+^4+\frac{\left(\text{znat} \eta +2 (-\text{tnat}+\text{znat}) \eta ^3\right)^2}{2+4 \eta ^2}} \sqrt{2 \pi } \eta  \sqrt{1+2 \eta ^2} \left(-1-2 \eta
+^2+2 \text{tnat}^2 \eta ^4\right) \text{Erfc}\left[\frac{\text{znat} \eta +2 (-\text{tnat}+\text{znat}) \eta ^3}{\sqrt{2+4 \eta ^2}}\right]\right)\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\pmb{\Delta \text{:=}\text{znat}-\text{tnat}}\\
+\pmb{\mu \text{:=}1+2\eta ^2}\\
+\pmb{\text{uchk}\text{:=}\frac{1}{2\mu ^{3/2}}\text{Exp}\left[-\eta ^4\left(\text{znat}^2+\text{tnat}^2(\mu +1)/\mu \right)\right]}\\
+\pmb{\left(2\sqrt{\mu }\text{Exp}\left[\frac{\text{tnat} \eta ^4(\text{tnat}+2\mu  \text{znat})}{\mu }\right]-\sqrt{2\pi }\text{tnat} \eta  \text{Exp}\left[\frac{\mu
+ \eta ^2\text{znat}^2}{2}+\eta ^4\text{tnat}^2\right]\text{Erfc}\left[\frac{\eta (\mu  \Delta +\text{tnat})}{\sqrt{2\mu }}\right]\right)}\\
+\pmb{\text{achk}\text{:=}\frac{\eta }{2\mu ^3}\text{Exp}\left[2\eta ^4\text{tnat} \Delta -\frac{\eta ^2(2\mu -1)\text{znat}^2}{2}\right]}\\
+\pmb{\left(4\mu  \eta ^3(\mu  \Delta -\text{tnat})\text{Exp}\left[\eta ^4\text{tnat}^2+\frac{\mu  \eta ^2\text{znat}^2}{2}\right]+\right.}\\
+\pmb{\left.\sqrt{2\pi  \mu }\left(2\eta ^4\text{tnat}^2-\mu \right)\text{Exp}\left[\frac{\mu  \eta ^2\text{znat}^2}{2}+\eta ^4\text{tnat}^2+\frac{\eta
+^2(\mu  \Delta  +\text{tnat})^2}{2\mu }\right]\text{Erfc}\left[\frac{\eta (\mu  \Delta +\text{tnat})}{\sqrt{2\mu }}\right]\right)}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\pmb{\text{FullSimplify}[\text{uchk}\text{==}\text{unat}[\text{znat},\text{tnat}]]}\\
+\pmb{\text{FullSimplify}[\text{achk}\text{==}\text{anat}[\text{znat},\text{tnat}]]}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\text{True}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\text{True}\)
+\end{doublespace}
+
+\end{document}

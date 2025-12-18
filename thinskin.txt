@@ -1,0 +1,20 @@
+In[1]:= $Assumptions:={r>0,z>0,\[Xi]>0,w>0,\[Tau]>0,v>0,S0>0,\[Eta]>0,devo>0}
+S[r_,z_,t_]:=-S0 Exp[-r^2/(2 w^2)]2\[Xi] DiracDelta[z] t/\[Tau] Exp[-(t/\[Tau])^2]
+tmp= Integrate[rdash/(4\[Pi] Sqrt[rdash^2+(z-zdash)^2]) S[rdash,zdash,t-Sqrt[rdash^2+(z-zdash)^2]/v],{zdash,-Infinity,Infinity}]
+u[z_,t_]=2\[Pi] Integrate[tmp,{rdash,0,Infinity}]
+Out[3]= (E^(-(rdash^2/(2 w^2))-(t-Sqrt[rdash^2+z^2]/v)^2/\[Tau]^2) rdash S0 (-t v+Sqrt[rdash^2+z^2]) \[Xi])/(2 \[Pi] v Sqrt[rdash^2+z^2] \[Tau])
+Out[4]= -1/(2 (2 w^2+v^2 \[Tau]^2)^(3/2))E^(-(z^2/(v^2 \[Tau]^2))-t^2 (1/\[Tau]^2+v^2/(2 w^2+v^2 \[Tau]^2))) S0 v w \[Xi] \[Tau] (E^(z^2/(2 w^2)+t^2/\[Tau]^2+z^2/(v^2 \[Tau]^2)) Sqrt[2 \[Pi]] t v^2 \[Tau]-2 E^((t (4 w^2 z+v^2 (t v+2 z) \[Tau]^2))/(2 v w^2 \[Tau]^2+v^3 \[Tau]^4)) w Sqrt[2 w^2+v^2 \[Tau]^2]+E^(z^2/(2 w^2)+t^2/\[Tau]^2+z^2/(v^2 \[Tau]^2)) Sqrt[2 \[Pi]] t v^2 \[Tau] Erf[(2 t v w^2-z (2 w^2+v^2 \[Tau]^2))/(v w \[Tau] Sqrt[4 w^2+2 v^2 \[Tau]^2])])
+In[5]:= a[z_,t_]=Simplify[D[u[z,tdash],tdash]/.tdash->t]
+Out[5]= -1/(2 \[Tau] (2 w^2+v^2 \[Tau]^2)^3)E^(-((-t v+z)^2/(v^2 \[Tau]^2))) S0 w \[Xi] (-2 E^((-2 t v w^2+2 w^2 z+v^2 z \[Tau]^2)^2/(4 v^2 w^4 \[Tau]^2+2 v^4 w^2 \[Tau]^4)) Sqrt[2 \[Pi]] t^2 v^5 \[Tau]^3 Sqrt[2 w^2+v^2 \[Tau]^2]+8 t (2 v w^5+3 v^3 w^3 \[Tau]^2+v^5 w \[Tau]^4)-(2 w^2+v^2 \[Tau]^2) (8 w^3 z+4 v^2 w z \[Tau]^2-E^((-2 t v w^2+2 w^2 z+v^2 z \[Tau]^2)^2/(4 v^2 w^4 \[Tau]^2+2 v^4 w^2 \[Tau]^4)) Sqrt[2 \[Pi]] v^3 \[Tau]^3 Sqrt[2 w^2+v^2 \[Tau]^2])+E^((-2 t v w^2+2 w^2 z+v^2 z \[Tau]^2)^2/(4 v^2 w^4 \[Tau]^2+2 v^4 w^2 \[Tau]^4)) Sqrt[2 \[Pi]] v^3 \[Tau]^3 Sqrt[2 w^2+v^2 \[Tau]^2] (-2 t^2 v^2+2 w^2+v^2 \[Tau]^2) Erf[(2 t v w^2-z (2 w^2+v^2 \[Tau]^2))/(v w \[Tau] Sqrt[4 w^2+2 v^2 \[Tau]^2])])
+In[6]:= unat[znat_,tnat_]=FullSimplify[u[znat devo,tnat devo/v]/(S0 \[Xi] devo)//.{w->devo/\[Eta],\[Tau]->w^2/(v devo)}]
+Out[6]= (E^(-\[Eta]^4 (znat^2+tnat^2 (1+1/(1+2 \[Eta]^2)))) (2 E^((tnat \[Eta]^4 (tnat+2 znat+4 znat \[Eta]^2))/(1+2 \[Eta]^2)) Sqrt[1+2 \[Eta]^2]-E^((znat^2 \[Eta]^2)/2+(tnat^2+znat^2) \[Eta]^4) Sqrt[2 \[Pi]] tnat \[Eta] Erfc[(znat \[Eta]+2 (-tnat+znat) \[Eta]^3)/Sqrt[2+4 \[Eta]^2]]))/(2 (1+2 \[Eta]^2)^(3/2))
+In[7]:= anat[znat_,tnat_]=Simplify[D[unat[znat,tdash],tdash]/.tdash->tnat,Assumptions->{znat>0,tnat>0}]
+Out[7]= 1/(2 (1+2 \[Eta]^2)^3)E^(-2 tnat^2 \[Eta]^4+2 tnat znat \[Eta]^4-1/2 znat^2 (\[Eta]^2+4 \[Eta]^4)) (4 E^(tnat^2 \[Eta]^4+znat^2 (\[Eta]^2/2+\[Eta]^4)) \[Eta]^4 (1+2 \[Eta]^2) (znat+2 znat \[Eta]^2-2 tnat (1+\[Eta]^2))+E^((znat^2 \[Eta]^2)/2+(tnat^2+znat^2) \[Eta]^4+(znat \[Eta]+2 (-tnat+znat) \[Eta]^3)^2/(2+4 \[Eta]^2)) Sqrt[2 \[Pi]] \[Eta] Sqrt[1+2 \[Eta]^2] (-1-2 \[Eta]^2+2 tnat^2 \[Eta]^4) Erfc[(znat \[Eta]+2 (-tnat+znat) \[Eta]^3)/Sqrt[2+4 \[Eta]^2]])
+In[8]:= \[CapitalDelta]:=znat-tnat
+\[Mu]:=1+2\[Eta]^2
+uchk:=1/(2\[Mu]^(3/2)) Exp[-\[Eta]^4(znat^2+tnat^2 (\[Mu]+1)/\[Mu])](2Sqrt[\[Mu]]Exp[(tnat \[Eta]^4 (tnat+2\[Mu] znat))/\[Mu]]-Sqrt[2\[Pi]]tnat \[Eta] Exp[(\[Mu] \[Eta]^2 znat^2)/2+\[Eta]^4 tnat^2]Erfc[(\[Eta](\[Mu] \[CapitalDelta]+tnat))/Sqrt[2\[Mu]]])
+achk:=\[Eta]/(2\[Mu]^3) Exp[2\[Eta]^4 tnat \[CapitalDelta]-(\[Eta]^2 (2\[Mu]-1)znat^2)/2](4\[Mu] \[Eta]^3 (\[Mu] \[CapitalDelta]-tnat)Exp[\[Eta]^4 tnat^2+(\[Mu] \[Eta]^2 znat^2)/2]+Sqrt[2\[Pi] \[Mu]](2\[Eta]^4 tnat^2-\[Mu])Exp[(\[Mu] \[Eta]^2 znat^2)/2+\[Eta]^4 tnat^2+(\[Eta]^2 (\[Mu] \[CapitalDelta] +tnat)^2)/(2\[Mu])]Erfc[(\[Eta](\[Mu] \[CapitalDelta]+tnat))/Sqrt[2\[Mu]]])
+In[12]:= FullSimplify[uchk==unat[znat,tnat]]
+FullSimplify[achk==anat[znat,tnat]]
+Out[12]= True
+Out[13]= True
