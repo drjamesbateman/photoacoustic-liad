@@ -60,9 +60,7 @@ if __name__=='__main__':
     # Load cases and labels from configuration file
     cases, labels = load_comparison_cases()
     
-    # A5 landscape aspect ratio: ~8.3" x 5.8", scale to half page but taller for 3 subplots
-    # Set larger font sizes for APS publication standards
-    plt.rcParams.update({'font.size': 13})  # Base font size
+    plt.rcParams.update({'font.size': 17})  # Base font size
     fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(8, 8), sharex=True)
     
     for case, label in zip(cases, labels):
@@ -79,20 +77,23 @@ if __name__=='__main__':
             ax3.plot(t, a/1e-3, label=label)             # acceleration in nm/ns²
     
     # Formatting - Displacement plot (top)
-    ax1.set_ylabel('Displacement [nm]', fontsize=14)
-    ax1.text(0.02, 0.95, '(a)', transform=ax1.transAxes, fontsize=16, fontweight='bold', 
+    ax1.set_ylabel('Displacement [nm]', fontsize=18)
+    ax1.text(0.02, 0.95, '(a)', transform=ax1.transAxes, fontsize=20, fontweight='bold',
              verticalalignment='top')
     
     # Formatting - Velocity plot (middle)
-    ax2.set_ylabel('Velocity [nm/ns]', fontsize=14)
-    ax2.text(0.02, 0.95, '(b)', transform=ax2.transAxes, fontsize=16, fontweight='bold',
+    ax2.set_ylabel('Velocity [nm/ns]', fontsize=18)
+    ax2.text(0.02, 0.95, '(b)', transform=ax2.transAxes, fontsize=20, fontweight='bold',
              verticalalignment='top')
     
     # Formatting - Acceleration plot (bottom)
-    ax3.set_ylabel('Acceleration [nm/ns²]', fontsize=14)
-    ax3.set_xlabel('Time - t$_{transit}$ [ns]', fontsize=14)
-    ax3.legend(loc='lower left', frameon=True, fontsize=12)
-    ax3.text(0.02, 0.95, '(c)', transform=ax3.transAxes, fontsize=16, fontweight='bold',
+    ax3.set_ylabel('Acceleration [nm/ns²]', fontsize=18)
+    ax3.set_xlabel('Time - t$_{transit}$ [ns]', fontsize=18)
+    # Legend placed below figure to avoid obscuring data
+    handles, leg_labels = ax3.get_legend_handles_labels()
+    fig.legend(handles, leg_labels, loc='lower center', ncol=3,
+               frameon=True, fontsize=16, bbox_to_anchor=(0.5, -0.08))
+    ax3.text(0.02, 0.95, '(c)', transform=ax3.transAxes, fontsize=20, fontweight='bold',
              verticalalignment='top')
     
     # Add vertical line at acoustic transit time
@@ -100,15 +101,16 @@ if __name__=='__main__':
     ax2.axvline(x=0, color='black', linestyle='--', alpha=0.7)
     ax3.axvline(x=0, color='black', linestyle='--', alpha=0.7)
     
-    # Set plot limits: -15 to +15 ns for display
-    ax1.set_xlim([-15, 15])
-    ax2.set_xlim([-15, 15])
-    ax3.set_xlim([-15, 15])
+    # Set plot limits: -11 to +11 ns for display, ticks every 5 ns
+    ax1.set_xlim([-11, 11])
+    ax2.set_xlim([-11, 11])
+    ax3.set_xlim([-11, 11])
+    ax3.set_xticks([-10, -5, 0, 5, 10])
     
     # Set tick label font sizes
-    ax1.tick_params(axis='both', labelsize=12)
-    ax2.tick_params(axis='both', labelsize=12)
-    ax3.tick_params(axis='both', labelsize=12)
+    ax1.tick_params(axis='both', labelsize=15)
+    ax2.tick_params(axis='both', labelsize=15)
+    ax3.tick_params(axis='both', labelsize=15)
     
     plt.tight_layout()
     plt.savefig('comparison.png', dpi=300, bbox_inches='tight')

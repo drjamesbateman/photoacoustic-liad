@@ -14,7 +14,7 @@ from itertools import product
 
 def S(x,y,z,t,w,xi,tau,v,S0):
     """Source term S as described in README."""
-    return -S0 * exp(-(x**2+y**2)/(2*w**2)) * exp(-abs(z)/xi) * (t/tau) * exp(-(t/tau)**2)
+    return -S0 * exp(-2*(x**2+y**2)/w**2) * exp(-abs(z)/xi) * (t/tau) * exp(-(t/tau)**2)
 
 def u(x,y,z,t, w,xi,tau,v,S0, N=10**5):
     """Find u(x,y,z,t) by Monte Carlo integration over a domain
@@ -126,6 +126,8 @@ def load_values(tag):
     w     = float(expts[tag]['waist'])
     xi = float(expts[tag]['skin_depth'])
 
+    tau /= 2*np.sqrt(np.log(2))
+
     thickness = float(expts[tag]['thickness'])
 
     mat = expts[tag]['material']
@@ -136,7 +138,7 @@ def load_values(tag):
 
     # Compute derived values
     Z = rho * v
-    H0 = beta*U0/(2 * pi**1.5 * w**2 * xi * tau)  # Corrected normalization
+    H0 = 2*beta*U0/(pi**1.5 * w**2 * xi * tau)
     S0 = (1/Z) * (alpha/Cp) * 2 * H0/tau
 
     # Convert all values used hereafter into um, ns units
@@ -162,7 +164,7 @@ if __name__=="__main__":
     t_transit = thickness/vals['v']
     t0 = t_transit - 50.0  # ns
     t1 = t_transit + 50.0  # ns
-    taxis = np.linspace(t0,t1,1001)  # Increase points for better resolution
+    taxis = np.linspace(t0,t1,4001)
     data = u_on_axis([thickness],taxis,**vals)
     uvals = data[0,:,0]
     avals = np.gradient(uvals,taxis)

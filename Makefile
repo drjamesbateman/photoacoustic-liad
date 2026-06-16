@@ -18,7 +18,7 @@ comparison.pdf: compare.py compare.txt $(CSV_FILES)
 	python3 compare.py
 
 diffraction.pdf: diffraction.py
-	python3 diffraction.py 2.5 --velocity --per-panel --samples 100000
+	python3 diffraction.py 2.5 --velocity --norm per-column --samples 100000
 
 spacetime.pdf: spacetime.py
 	python3 spacetime.py

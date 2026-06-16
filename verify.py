@@ -32,8 +32,8 @@ if __name__=='__main__':
     plt.plot(taxis,avals,label='Acceleration [um/ns$^2$]  [Monte Carlo]')
 
     # Thin-skin analytical
-    d_evo = vals['w']**2 / (vals['v'] * vals['tau'])
-    eta = vals['w'] / (vals['v'] * vals['tau'])
+    d_evo = vals['w']**2 / (4 * vals['v'] * vals['tau'])
+    eta = vals['w'] / (2 * vals['v'] * vals['tau'])
     z_nat = thickness / d_evo
     t_nat = taxis * vals['v'] / d_evo
     u_nat, a_nat = ua_nat(z_nat, t_nat, eta)

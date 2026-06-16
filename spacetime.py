@@ -3,12 +3,12 @@
 Acoustic pulse evolution in the thin-skin limit using analytical solution.
 
 Implements the analytical formula derived in Appendix A, showing how the
-normalized waveform depends on the dimensionless parameter eta = w/(v*tau).
+normalized waveform depends on the dimensionless parameter eta = w/(2*v*tau).
 """
 
 import numpy as np
 import matplotlib.pyplot as plt
-plt.rcParams.update({'font.size': 22})
+plt.rcParams.update({'font.size': 28})
 from thinskin import u_nat, a_nat
 
 def create_eta_comparison_plot(plot_velocity=False):
@@ -20,8 +20,8 @@ def create_eta_comparison_plot(plot_velocity=False):
         If True, plot velocity; if False, plot acceleration
     """
 
-    z_max = 2.5
-    t_max = 2.5
+    z_max = 4.0
+    t_max = 4.0
     nz = 200
     nt = 200
 
@@ -30,11 +30,11 @@ def create_eta_comparison_plot(plot_velocity=False):
     Z, T = np.meshgrid(z_norm, t_norm)
 
     # Eta values to compare
-    # Geometrically spaced to match experimental systems: Nikkhou (0.6), intermediate (1.4), Bykov (3.1)
-    eta_values = [0.6, 1.4, 3.1]
-    titles = ['(a) η = 0.6\n(tight focus)',
-              '(b) η = 1.4\n(intermediate)',
-              '(c) η = 3.1\n(large waist)']
+    # Geometrically spaced to match experimental systems: Nikkhou (0.24), intermediate (0.8), Bykov (2.6)
+    eta_values = [0.24, 0.8, 2.6]
+    titles = ['(a) η = 0.24\n(tight focus)',
+              '(b) η = 0.8\n(intermediate)',
+              '(c) η = 2.6\n(large waist)']
 
     # Create figure with tight subplot spacing
     fig, axes = plt.subplots(1, 3, figsize=(15, 4.5),
@@ -77,19 +77,19 @@ def create_eta_comparison_plot(plot_velocity=False):
                       vmin=-vmax,
                       vmax=vmax)
 
-        ax.set_xlabel(r'$z/d_{\mathrm{evo}}$', fontsize=18)
+        ax.set_xlabel(r'$z/d_{\mathrm{evo}}$', fontsize=24)
         if i == 0:
-            ax.set_ylabel(r'$vt/d_{\mathrm{evo}}$', fontsize=18)
+            ax.set_ylabel(r'$vt/d_{\mathrm{evo}}$', fontsize=24)
         else:
             ax.set_yticklabels([])
 
-        ax.set_title(title, fontsize=18)
+        ax.set_title(title, fontsize=24)
 
         # Add substrate thickness markers for experimental systems
-        if i == 0:  # Nikkhou: d = 17 μm, d_evo = 11 μm → d/d_evo = 1.55
-            ax.axvline(x=1.55, color='black', linestyle='--', linewidth=1.2, alpha=0.7)
-        elif i == 2:  # Bykov: d = 100 μm, d_evo = 330 μm → d/d_evo = 0.30
-            ax.axvline(x=0.30, color='black', linestyle='--', linewidth=1.2, alpha=0.7)
+        if i == 0:  # Nikkhou: d = 400 μm, d_evo = 1.0 μm → d/d_evo ~ 390 (beyond plot range)
+            pass
+        elif i == 2:  # Bykov: d = 250 μm, d_evo = 130 μm → d/d_evo ~ 1.9
+            ax.axvline(x=1.9, color='black', linestyle='--', linewidth=1.2, alpha=0.7)
 
         # Add wavefront line
         ax.plot([0, min(z_max, t_max)], [0, min(z_max, t_max)],
@@ -104,7 +104,7 @@ def create_eta_comparison_plot(plot_velocity=False):
     fig.subplots_adjust(right=0.92)
     cbar_ax = fig.add_axes([0.93, 0.15, 0.015, 0.7])
     cbar = fig.colorbar(im, cax=cbar_ax)
-    cbar.set_label(ylabel, fontsize=18)
+    cbar.set_label(ylabel, fontsize=24)
 
     # Save
     plt.savefig('spacetime.png', dpi=300, bbox_inches='tight')

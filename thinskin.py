@@ -22,7 +22,7 @@ def ua_nat(z_nat, t_nat, eta):
     t_nat : array_like
         Normalized time vt/d_evo
     eta : float
-        Dimensionless parameter w/(v*tau) = d_evo/w
+        Dimensionless parameter w/(2*v*tau) = 2*d_evo/w
 
     Returns:
     --------
@@ -57,7 +57,7 @@ def ua_nat(z_nat, t_nat, eta):
     exp_u2_combined = exp_u_lead + mu*eta2*z_nat2/2 + eta4*t_nat2
     u_term2 = -np.sqrt(2*np.pi) * t_nat * eta * np.exp(exp_u2_combined) * erfc_val
 
-    u_coeff = 1 / (2 * mu**(3/2))  # Corrected prefactor (positive for expansion)
+    u_coeff = 1 / (2 * mu**(3/2))
     u_result = u_coeff * (u_term1 + u_term2)
 
     # === ACCELERATION calculation ===
@@ -71,7 +71,7 @@ def ua_nat(z_nat, t_nat, eta):
     a_term2 = np.sqrt(2*np.pi*mu) * (2*eta4*t_nat2 - mu) \
             * np.exp(exp_a2_combined) * erfc_val
 
-    a_coeff = eta / (2 * mu**3)  # Corrected prefactor (consistent with velocity)
+    a_coeff = eta / (2 * mu**3)
     a_result = a_coeff * (a_term1 + a_term2)
 
     return u_result, a_result

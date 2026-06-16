@@ -68,5 +68,5 @@ Millen:
   absorption: 0.084
   pulse_energy: 3e-3
   pulse_duration: 4.6e-09
-  waist: 17e-6
+  waist: 8.5e-6
   thickness: 400e-6
