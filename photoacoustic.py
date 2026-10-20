@@ -16,20 +16,24 @@ def S(x,y,z,t,w,xi,tau,v,S0):
     """Source term S as described in README."""
     return -S0 * exp(-2*(x**2+y**2)/w**2) * exp(-abs(z)/xi) * (t/tau) * exp(-(t/tau)**2)
 
-def u(x,y,z,t, w,xi,tau,v,S0, N=10**5):
+def u(x,y,z,t, w,xi,tau,v,S0, N=10**5, rng=None):
     """Find u(x,y,z,t) by Monte Carlo integration over a domain
     extending 3x the Gaussian width and 3x the skin depth of the
     laser pulse. This finite region captures ~95% of the total.
 
     (This function operates only on single values for x,y,z,t.)
+
+    rng : numpy Generator to draw samples from (fresh one if None).
     """
+
+    rng = np.random.default_rng() if rng is None else rng
 
     # Define domain, probability density p, and pick points X,Y,Z
     X0,Y0,Z0 = 3*w, 3*w, 3*xi
     p = 1/(2*2*2*X0*Y0*Z0)
-    X = np.random.uniform(low=-X0,high=X0,size=N)
-    Y = np.random.uniform(low=-Y0,high=Y0,size=N)
-    Z = np.random.uniform(low=-Z0,high=Z0,size=N)
+    X = rng.uniform(low=-X0,high=X0,size=N)
+    Y = rng.uniform(low=-Y0,high=Y0,size=N)
+    Z = rng.uniform(low=-Z0,high=Z0,size=N)
 
     # Compute samples of the integrand
     # scipy.linalg.norm does not support arrays so we compute with numpy tools
@@ -49,13 +53,17 @@ def uargs(args):
     """Rephrasing of function u to accept args as a list,
     and return only the Monte Carlo estimate i.e. discard
     the uncertainty estimate."""
-    return u(*args)[0]
+    *uparams, seed = args
+    return u(*uparams, rng=np.random.default_rng(seed))[0]
 
 def u_array(xaxis,yaxis,zaxis,taxis,w,xi,tau,v,S0,N=10**5):
     """Wrapper to parallel process function u over iterables
-    (xaxis,yaxis,zaxis,taxis) and return 4D array"""
+    (xaxis,yaxis,zaxis,taxis) and return 4D array."""
 
-    args = [(x,y,z,t,w,xi,tau,v,S0,N) for x,y,z,t in product(xaxis,yaxis,zaxis,taxis)]    
+    points = list(product(xaxis,yaxis,zaxis,taxis))
+    # Each point gets its own random stream; forked workers would otherwise share one
+    seeds = np.random.SeedSequence().spawn(len(points))
+    args = [(x,y,z,t,w,xi,tau,v,S0,N,s) for (x,y,z,t),s in zip(points,seeds)]
     with ProcessPoolExecutor() as executor:
         data = list(executor.map(uargs, args))
     data = np.array(data).reshape(len(xaxis),len(yaxis),len(zaxis),len(taxis))

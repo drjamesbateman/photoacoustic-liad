@@ -163,6 +163,8 @@ def create_diffraction_figure(d_over_devo=1.0, plot_acceleration=True, normaliza
             snapshot = all_data[idx]
             vmax = vmaxes[idx]
             idx += 1
+            if normalization != 'global':
+                snapshot, vmax = snapshot / vmax, 1.0
 
             # Create mesh plot
             # Note: raxis_phys and zaxis_phys are in µm, convert to natural units for display
